@@ -7,40 +7,36 @@ import { CaptureFinger } from "../mfs100";
 
 const Profile = () => {
   const tokenvalue = gettoken();
-  const [fname,setfname] = useState('')
-  const [lname,setlname] = useState('')
-  const [email,setemail] = useState('')
-  const [number,setnumber] = useState('')
-  const [fingerprint_img,setfingerprint_img] = useState('')
-  const [fingerprint_key,setfingerprint_key] = useState('')
-  const [userdata,setuserdata] = useState({})
-  const [updateres,setupdateres] = useState(false)
+  const [fname, setfname] = useState("");
+  const [lname, setlname] = useState("");
+  const [email, setemail] = useState("");
+  const [number, setnumber] = useState("");
+  const [fingerprint_img, setfingerprint_img] = useState("");
+  const [fingerprint_key, setfingerprint_key] = useState("");
+  const [userdata, setuserdata] = useState({});
+  const [updateres, setupdateres] = useState(false);
 
-
-const sumbitprofile = async() =>{
+  const sumbitprofile = async () => {
     const data = {
-        first_name: fname,
-        last_name: lname,
-        email,
-        mobile:number,
-        fingerprint_key,
-        fingerprint_img,
-      };
-        const response = await axios.patch(
-          `https://backend-aadhar.onrender.com/api/user/${tokenvalue[0]._id}`,
-          data
-        );
-        console.log("resons", response);
-        setupdateres(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+      first_name: fname,
+      last_name: lname,
+      email,
+      mobile: number,
+      fingerprint_key,
+      fingerprint_img,
+    };
+    const response = await axios.patch(
+      `https://backend-aadhar.onrender.com/api/user/${tokenvalue[0]._id}`,
+      data
+    );
+    console.log("resons", response);
+    setupdateres(true);
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  };
 
-
-}
-
-
-const CaptureFingerPrint = () => {
+  const CaptureFingerPrint = () => {
     try {
       const client = new CaptureFinger();
       if (client.data.AnsiTemplate) {
@@ -56,127 +52,109 @@ const CaptureFingerPrint = () => {
     }
   };
 
-
   useEffect(() => {
     const userinfo = async () => {
       let url = `https://backend-aadhar.onrender.com/api/user/${tokenvalue[0]._id}`;
       const response = await axios.get(url);
       console.log("user info", response);
-      setuserdata(response.data.data)
-      setfname(response.data.data.first_name)
-      setlname(response.data.data.last_name)
-      setemail(response.data.data.email)
-      setnumber(response.data.data.mobile)
-      setfingerprint_img(response.data.data.fingerprint_img)
-      setfingerprint_key(response.data.data.fingerprint_key)
+      setuserdata(response.data.data);
+      setfname(response.data.data.first_name);
+      setlname(response.data.data.last_name);
+      setemail(response.data.data.email);
+      setnumber(response.data.data.mobile);
+      setfingerprint_img(response.data.data.fingerprint_img);
+      setfingerprint_key(response.data.data.fingerprint_key);
     };
 
     userinfo();
   }, []);
+
   return (
     <div>
       <Header />
-      <div>
+      <div className="p-6">
         <form>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px 70px",
-            }}
-          >
-            <div className="form-group " style={{ width: "45%" }}>
-              <label htmlFor="firstName">First Name:</label>
+          <div className="flex justify-between px-16 py-4">
+            <div className="flex flex-col w-1/2 pr-2">
+              <label htmlFor="firstName" className="mb-1 font-medium">
+                First Name:
+              </label>
               <input
                 type="text"
-                className="form-control"
                 id="firstName"
+                className="p-2 border rounded"
                 placeholder="Enter First Name"
                 value={fname}
-                onChange={(e)=>{setfname(e.target.value)}}
+                onChange={(e) => setfname(e.target.value)}
               />
             </div>
-            <div
-              className="form-group"
-              style={{ width: "45%", marginTop: "0px" }}
-            >
-              <label htmlFor="lastName">Last Name:</label>
+            <div className="flex flex-col w-1/2 pl-2">
+              <label htmlFor="lastName" className="mb-1 font-medium">
+                Last Name:
+              </label>
               <input
                 type="text"
-                className="form-control"
                 id="lastName"
+                className="p-2 border rounded"
                 placeholder="Enter Last Name"
                 value={lname}
-                onChange={(e)=>{setlname(e.target.value)}}
+                onChange={(e) => setlname(e.target.value)}
               />
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "10px 70px",
-            }}
-          >
-            <div className="form-group" style={{ width: "45%" }}>
-              <label htmlFor="email">Email:</label>
+          <div className="flex justify-between px-16 py-4">
+            <div className="flex flex-col w-1/2 pr-2">
+              <label htmlFor="email" className="mb-1 font-medium">
+                Email:
+              </label>
               <input
                 type="email"
-                className="form-control"
                 id="email"
+                className="p-2 border rounded"
                 placeholder="Enter Email"
                 value={email}
-                onChange={(e)=>{setemail(e.target.value)}}
+                onChange={(e) => setemail(e.target.value)}
               />
             </div>
-            <div
-              className="form-group"
-              style={{ width: "45%", marginTop: "0px" }}
-            >
-              <label htmlFor="number">Mobile No:</label>
+            <div className="flex flex-col w-1/2 pl-2">
+              <label htmlFor="number" className="mb-1 font-medium">
+                Mobile No:
+              </label>
               <input
                 type="text"
-                className="form-control"
                 id="number"
+                className="p-2 border rounded"
                 placeholder="Enter Number"
                 value={number}
-                onChange={(e)=>{setnumber(e.target.value)}}
+                onChange={(e) => setnumber(e.target.value)}
               />
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: "10px 70px",
-              border: "1px solid #e6e6e6",
-            }}
-          >
-            <img src={`data:image/png;base64,${fingerprint_img}`} onClick={()=>{CaptureFingerPrint()}} alt="404" width="200px" height="220px" />
+          <div className="flex justify-center px-16 py-4 border border-gray-300">
+            <img
+              src={`data:image/png;base64,${fingerprint_img}`}
+              onClick={() => CaptureFingerPrint()}
+              alt="Fingerprint"
+              className="cursor-pointer w-48 h-52"
+            />
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "10px 70px",
-            }}
-          >
-            <button type="button" onClick={()=>{sumbitprofile()}} className="btn btn-primary">
+          <div className="flex justify-center px-16 py-4">
+            <button
+              type="button"
+              onClick={() => sumbitprofile()}
+              className="px-6 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+            >
               Submit
             </button>
           </div>
+          {updateres && (
             <div
-          class="alert alert-success"
-          style={{
-            color: "white",
-            width: "90%",
-            margin:'10px 70px',
-            display: updateres == true ? "block" : "none",
-          }}
-          role="alert"
-        >
-          Update Profile Successfully
-        </div>
+              className="w-11/12 px-4 py-2 mx-16 mt-4 text-white bg-green-500 rounded"
+              role="alert"
+            >
+              Update Profile Successfully
+            </div>
+          )}
         </form>
       </div>
       <Footer />

@@ -8,18 +8,21 @@ import Login from "./pages/Login/Login.jsx";
 import Register from "./pages/Register/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import { gettoken } from "./Localstorage/Store.jsx";
+import UserRegistration from "./pages/Register/UserRegistration.jsx";
 
 function App() {
   const tokenvalue = gettoken();
   
   return (
     <div className="App">
-      <h1 style={{textAlign:"center", background:"#f5fffa", padding:'14px',  font:"bold"}}>Arvind Aadhar Center</h1>
       <Routes >
         <Route path="/" element={tokenvalue ? <Home /> : <Login />} />
+        <Route path="/home" element={<Home/>} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={tokenvalue ? <Profile /> : <Login />} />
+        <Route path="/client-registration" element = {<UserRegistration />} />
           </Routes>
     </div>
   )
