@@ -53,12 +53,14 @@ const UserRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen p-5 w-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500">
       <form
-        className="bg-white shadow-md rounded-md p-8 max-w-4xl w-full"
+        className="bg-gray-50 shadow-md rounded-md p-8 max-w-4xl w-full"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-xl font-semibold text-gray-700 mb-6">Client Info.</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-6">
+          Client Info.
+        </h2>
 
         {/* Input Fields */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
@@ -153,10 +155,10 @@ const UserRegistration = () => {
                 <img
                   src={`data:image/png;base64,${fp.img}`}
                   alt={`Fingerprint ${index + 1}`}
-                  className="h-20 w-20 object-contain border border-gray-300"
+                  className="h-28 w-28 object-contain border border-gray-300"
                 />
               ) : (
-                <div className="h-20 w-20 bg-gray-200 flex items-center justify-center border border-gray-300">
+                <div className="h-28 w-28 bg-gray-200 flex items-center justify-center border border-gray-300">
                   <p className="text-gray-500 text-sm">No Image</p>
                 </div>
               )}
