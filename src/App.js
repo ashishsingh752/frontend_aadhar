@@ -9,6 +9,7 @@ import Register from "./pages/Register/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import { gettoken } from "./Localstorage/Store.jsx";
 import UserRegistration from "./pages/Register/UserRegistration.jsx";
+import ClientInfo from "./pages/ClientTable.jsx";
 
 function App() {
   const tokenvalue = gettoken();
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={tokenvalue ? <Profile /> : <Login />} />
         <Route path="/client-registration" element = {<UserRegistration />} />
+        <Route path="/client-info" element = {<ClientInfo />} />
           </Routes>
     </div>
   )
